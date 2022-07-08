@@ -1,5 +1,7 @@
 package com.alexenderboot.retrofit;
 
+import com.alexenderboot.retrofit.request.AlbumCreateRequest;
+import com.alexenderboot.retrofit.request.AlbumUpdateRequest;
 import com.alexenderboot.retrofit.request.PostCreateRequest;
 import com.alexenderboot.retrofit.request.PostUpdateRequest;
 import com.alexenderboot.retrofit.response.AlbumResponse;
@@ -33,7 +35,18 @@ public interface JsonPlaceholderApi {
     @GET("/users")
     Call<List<UserResponse>> users();
 
-    @GET("/users/{userId}/albums")
-    Call<List<AlbumResponse>> userAlbums(@Path ("userId") Integer userId);
+    @GET("/albums")
+    Call<List<AlbumResponse>> userAlbums();
 
+    @GET("albums/{id}")
+    Call<AlbumResponse> userAlbum(@Path ("id") Integer id);
+
+    @POST("/albums")
+    Call<AlbumResponse> albumCreate(@Body AlbumCreateRequest request);
+
+    @PUT("/albums/{id}")
+    Call<AlbumResponse> albumUpdate(@Path ("id") Integer id, @Body AlbumUpdateRequest request);
+
+    @DELETE("/albums/{id}")
+    Call<Void> albumDelete(@Path ("id") Integer id);
 }

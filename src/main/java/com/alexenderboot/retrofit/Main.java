@@ -1,5 +1,7 @@
 package com.alexenderboot.retrofit;
 
+import com.alexenderboot.retrofit.request.AlbumCreateRequest;
+import com.alexenderboot.retrofit.request.AlbumUpdateRequest;
 import com.alexenderboot.retrofit.request.PostCreateRequest;
 import com.alexenderboot.retrofit.request.PostUpdateRequest;
 import com.alexenderboot.retrofit.response.AlbumResponse;
@@ -59,8 +61,32 @@ public class Main {
         System.out.println(users);
 
         System.out.println("---------ALBUMS---------");
-        List<AlbumResponse> albums = api.userAlbums(1).execute().body();
+        List<AlbumResponse> albums = api.userAlbums().execute().body();
         System.out.println(albums);
+
+        System.out.println("---------ALBUM 1---------");
+
+        AlbumResponse album = api.userAlbum(1).execute().body();
+        System.out.println(album);
+
+        System.out.println("---------ALBUM CREATE---------");
+        AlbumResponse albumCreate = api.albumCreate(AlbumCreateRequest.builder()
+                .title("New album")
+                .build()
+        ).execute().body();
+        System.out.println(albumCreate);
+
+        System.out.println("---------ALBUMS UPDATE---------");
+        AlbumResponse albumUpdate = api.albumUpdate(1, AlbumUpdateRequest.builder()
+                .userId(3)
+                .title("New album update")
+                .build()
+        ).execute().body();
+        System.out.println(albumUpdate);
+
+        System.out.println("---------ALBUM DELETE---------");
+        Boolean albumDelete = api.albumDelete(1).execute().isSuccessful();
+        System.out.println(albumDelete);
 
         Call<List<CommentResponse>> commentsCall = api.postComments(1);
         Response<List<CommentResponse>> commentsCallResponse = commentsCall.execute();
