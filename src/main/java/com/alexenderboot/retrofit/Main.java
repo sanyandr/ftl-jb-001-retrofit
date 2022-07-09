@@ -1,9 +1,6 @@
 package com.alexenderboot.retrofit;
 
-import com.alexenderboot.retrofit.request.AlbumCreateRequest;
-import com.alexenderboot.retrofit.request.AlbumUpdateRequest;
-import com.alexenderboot.retrofit.request.PostCreateRequest;
-import com.alexenderboot.retrofit.request.PostUpdateRequest;
+import com.alexenderboot.retrofit.request.*;
 import com.alexenderboot.retrofit.response.AlbumResponse;
 import com.alexenderboot.retrofit.response.CommentResponse;
 import com.alexenderboot.retrofit.response.PostResponse;
@@ -59,6 +56,29 @@ public class Main {
         System.out.println("---------USERS---------");
         List<UserResponse> users = api.users().execute().body();
         System.out.println(users);
+
+        System.out.println("---------USER---------");
+        UserResponse user = api.user(1).execute().body();
+        System.out.println(user);
+
+        System.out.println("---------USER CREATE---------");
+        UserResponse userCreate = api.userCreate(UserCreateRequest.builder()
+                .userId(2)
+                .name("V.I.Lenin")
+                .build()
+        ).execute().body();
+        System.out.println(userCreate);
+
+        System.out.println("---------USER UPDATE---------");
+        UserResponse userUpdate = api.userUpdate(2, UserUpdateRequest.builder()
+                .name("VIHUHOL")
+                .build()
+        ).execute().body();
+        System.out.println(userUpdate);
+
+        System.out.println("---------USER DELETE---------");
+        Boolean userDelete = api.userDelete(1).execute().isSuccessful();
+        System.out.println(userDelete);
 
         System.out.println("---------ALBUMS---------");
         List<AlbumResponse> albums = api.userAlbums().execute().body();
