@@ -1,9 +1,6 @@
 package com.alexenderboot.retrofit;
 
-import com.alexenderboot.retrofit.request.AlbumCreateRequest;
-import com.alexenderboot.retrofit.request.AlbumUpdateRequest;
-import com.alexenderboot.retrofit.request.PostCreateRequest;
-import com.alexenderboot.retrofit.request.PostUpdateRequest;
+import com.alexenderboot.retrofit.request.*;
 import com.alexenderboot.retrofit.response.AlbumResponse;
 import com.alexenderboot.retrofit.response.CommentResponse;
 import com.alexenderboot.retrofit.response.PostResponse;
@@ -35,11 +32,20 @@ public interface JsonPlaceholderApi {
     @GET("/users")
     Call<List<UserResponse>> users();
 
+    @GET("/users/{userId}")
+    Call<UserResponse> user(@Path ("userId") Integer userId);
+
+    @PUT("/users/{userId}")
+    Call<UserResponse> userUpdate(@Path ("userId") Integer userId, @Body UserUpdateRequest request);
+
     @GET("/albums")
     Call<List<AlbumResponse>> userAlbums();
 
     @GET("albums/{id}")
     Call<AlbumResponse> userAlbum(@Path ("id") Integer id);
+
+    @POST("/users")
+    Call<UserResponse> userCreate(@Body UserCreateRequest request);
 
     @POST("/albums")
     Call<AlbumResponse> albumCreate(@Body AlbumCreateRequest request);
@@ -49,4 +55,7 @@ public interface JsonPlaceholderApi {
 
     @DELETE("/albums/{id}")
     Call<Void> albumDelete(@Path ("id") Integer id);
+
+    @DELETE("/users/{userId}")
+    Call<Void> userDelete(@Path ("userId") Integer userId);
 }
