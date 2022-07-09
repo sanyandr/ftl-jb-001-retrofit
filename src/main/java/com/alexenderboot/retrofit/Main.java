@@ -53,6 +53,23 @@ public class Main {
         List<CommentResponse> postComments = api.postComments(1).execute().body();
         System.out.println(postComments);
 
+        System.out.println("---------POST COMMENT---------");
+        CommentResponse postComment = api.postComment(1).execute().body();
+        System.out.println(postComment);
+
+        System.out.println("---------COMMENT CREATE---------");
+        CommentResponse commentCreate = api.commentCreate(CommentCreateRequest.builder()
+                .postId(2)
+                .name("V.I.Lenin")
+                .body("nothing matter")
+                .build()
+        ).execute().body();
+        System.out.println(commentCreate);
+
+        System.out.println("---------COMMENT DELETE---------");
+        Boolean commentDelete = api.commentDelete(1).execute().isSuccessful();
+        System.out.println(commentDelete);
+
         System.out.println("---------USERS---------");
         List<UserResponse> users = api.users().execute().body();
         System.out.println(users);
@@ -68,6 +85,14 @@ public class Main {
                 .build()
         ).execute().body();
         System.out.println(userCreate);
+
+        System.out.println("---------COMMENT UPDATE---------");
+        CommentResponse commentUpdate = api.commentUpdate(2, CommentUpdateRequest.builder()
+                .userId(2)
+                .body("nothing again")
+                .build()
+        ).execute().body();
+        System.out.println(commentUpdate);
 
         System.out.println("---------USER UPDATE---------");
         UserResponse userUpdate = api.userUpdate(2, UserUpdateRequest.builder()

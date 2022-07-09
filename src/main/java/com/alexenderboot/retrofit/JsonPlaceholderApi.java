@@ -29,6 +29,18 @@ public interface JsonPlaceholderApi {
     @GET("/posts/{id}/comments")
     Call<List<CommentResponse>> postComments(@Path ("id") Integer id);
 
+    @GET("/comments/{id}")
+    Call<CommentResponse> postComment(@Path ("id") Integer id);
+
+    @POST("/comments")
+    Call<CommentResponse> commentCreate(@Body CommentCreateRequest request);
+
+    @PUT("/comments/{id}")
+    Call<CommentResponse> commentUpdate(@Path ("id") Integer id, @Body CommentUpdateRequest request);
+
+    @DELETE("/comments/{id}")
+    Call<Void> commentDelete(@Path ("id") Integer id);
+
     @GET("/users")
     Call<List<UserResponse>> users();
 
@@ -58,4 +70,6 @@ public interface JsonPlaceholderApi {
 
     @DELETE("/users/{userId}")
     Call<Void> userDelete(@Path ("userId") Integer userId);
+
+    //
 }
