@@ -1,10 +1,7 @@
 package com.alexenderboot.retrofit;
 
 import com.alexenderboot.retrofit.request.*;
-import com.alexenderboot.retrofit.response.AlbumResponse;
-import com.alexenderboot.retrofit.response.CommentResponse;
-import com.alexenderboot.retrofit.response.PostResponse;
-import com.alexenderboot.retrofit.response.UserResponse;
+import com.alexenderboot.retrofit.response.*;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -162,5 +159,29 @@ public class Main {
             });
         }
         System.out.println("passed");
+
+        //task4
+        System.out.println("---------COMMENTS---------");
+        List<CommentResponse> comments = api.comments(1).execute().body();
+        System.out.println(comments);
+
+        System.out.println("---------ALBUM PHOTOS---------");
+        List<PhotoResponse> albumPhotos = api.albumPhotos(1).execute().body();
+        System.out.println(albumPhotos);
+
+        System.out.println("---------USER ALBUMS---------");
+        List<AlbumResponse> userAlbums = api.userAlbums(1).execute().body();
+        System.out.println(userAlbums);
+
+        System.out.println("---------USER TODOS---------");
+        List<TodosResponse> userTodos = api.userTodos(1).execute().body();
+        System.out.println(userTodos);
+
+        System.out.println("---------USER POSTS---------");
+        List<PostResponse> userPosts = api.userPosts(1).execute().body();
+        System.out.println(userPosts);
+
+
+
     }
 }

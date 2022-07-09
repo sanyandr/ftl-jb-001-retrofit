@@ -1,10 +1,7 @@
 package com.alexenderboot.retrofit;
 
 import com.alexenderboot.retrofit.request.*;
-import com.alexenderboot.retrofit.response.AlbumResponse;
-import com.alexenderboot.retrofit.response.CommentResponse;
-import com.alexenderboot.retrofit.response.PostResponse;
-import com.alexenderboot.retrofit.response.UserResponse;
+import com.alexenderboot.retrofit.response.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -71,5 +68,19 @@ public interface JsonPlaceholderApi {
     @DELETE("/users/{userId}")
     Call<Void> userDelete(@Path ("userId") Integer userId);
 
-    //
+    //taks4
+    @GET("/posts/{id}/comments")
+    Call<List<CommentResponse>> comments(@Path ("id") Integer id);
+
+    @GET("/albums/{id}/photos")
+    Call<List<PhotoResponse>> albumPhotos(@Path ("id") Integer id);
+
+    @GET("/albums/{id}/photos")
+    Call<List<AlbumResponse>> userAlbums(@Path ("id") Integer id);
+
+    @GET("/users/{id}/todos")
+    Call<List<TodosResponse>> userTodos(@Path ("id") Integer id);
+
+    @GET("/users/{id}/posts")
+    Call<List<PostResponse>> userPosts(@Path ("id") Integer id);
 }
